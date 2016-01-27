@@ -13,7 +13,18 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
+        android:id="@+id/go_tablelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Go TableLayout Example!" />
+
+    <TextView
+        android:id="@+id/go_viewpager_for_pageapater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/go_tablelayout"
+        android:layout_marginTop="10dp"
+        android:text="Go ViewPager for PageAdapter"
+        />
+
 </RelativeLayout>
