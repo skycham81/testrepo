@@ -27,4 +27,13 @@
         android:text="Go ViewPager for PageAdapter"
         />
 
+    <TextView
+        android:id="@+id/go_achartengine_example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/go_viewpager_for_pageapater"
+        android:layout_marginTop="10dp"
+        android:text="Go AChartEngine Example"
+        />
+
 </RelativeLayout>

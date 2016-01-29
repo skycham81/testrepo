@@ -55,7 +55,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, ViewPagerExample.class);
+                Intent intent = new Intent(context, AChartEngineExample.class);
+
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.go_achartengine_example).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Context context = v.getContext();
+
+                Intent intent = new Intent(context, AChartEngineExample.class);
 
                 startActivity(intent);
             }
