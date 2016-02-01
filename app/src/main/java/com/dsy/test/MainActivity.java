@@ -1,10 +1,8 @@
 package com.dsy.test;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -16,11 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     int mSortMode = -1;
-
-    static int mCreatedFragmentCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,46 +28,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        findViewById(R.id.go_tablelayout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, TabLayoutExample.class);
-
-                startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.go_viewpager_for_pageapater).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, AChartEngineExample.class);
-
-                startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.go_achartengine_example).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Context context = v.getContext();
-
-                Intent intent = new Intent(context, AChartEngineExample.class);
-
-                startActivity(intent);
-            }
-        });
+        findViewById(R.id.fab).setOnClickListener(this);
+        findViewById(R.id.go_tablelayout).setOnClickListener(this);
+        findViewById(R.id.go_viewpager_for_pageapater).setOnClickListener(this);
+        findViewById(R.id.go_achartengine_example).setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -157,5 +117,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSortMode = item.getItemId();
         // Request a call to onPrepareOptionsMenu so we can change the sort icon
         invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.fab:
+                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+            case R.id.go_tablelayout:
+                intent = new Intent(v.getContext(), TabLayoutExample.class);
+                startActivity(intent);
+                break;
+            case R.id.go_viewpager_for_pageapater:
+                intent = new Intent(v.getContext(), ViewPagerExample.class);
+                startActivity(intent);
+                break;
+            case R.id.go_achartengine_example:
+                intent = new Intent(v.getContext(), AChartEngineExample.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
