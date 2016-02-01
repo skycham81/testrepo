@@ -36,4 +36,22 @@
         android:text="Go AChartEngine Example"
         />
 
+    <TextView
+        android:id="@+id/go_mpandroidchart_example1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/go_achartengine_example"
+        android:layout_marginTop="10dp"
+        android:text="Go MPAndroidChart Example1"
+        />
+
+    <TextView
+        android:id="@+id/go_mpandroidchart_example2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/go_mpandroidchart_example1"
+        android:layout_marginTop="10dp"
+        android:text="Go MPAndroidChart Example2"
+        />
+
 </RelativeLayout>

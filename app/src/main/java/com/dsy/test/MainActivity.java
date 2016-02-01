@@ -32,11 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.go_tablelayout).setOnClickListener(this);
         findViewById(R.id.go_viewpager_for_pageapater).setOnClickListener(this);
         findViewById(R.id.go_achartengine_example).setOnClickListener(this);
+        findViewById(R.id.go_mpandroidchart_example1).setOnClickListener(this);
+        findViewById(R.id.go_mpandroidchart_example2).setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -124,8 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()){
             case R.id.fab:
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 break;
             case R.id.go_tablelayout:
                 intent = new Intent(v.getContext(), TabLayoutExample.class);
@@ -137,6 +138,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.go_achartengine_example:
                 intent = new Intent(v.getContext(), AChartEngineExample.class);
+                startActivity(intent);
+                break;
+            case R.id.go_mpandroidchart_example1:
+                intent = new Intent(v.getContext(), MPAndroidChartExample1.class);
+                startActivity(intent);
+                break;
+            case R.id.go_mpandroidchart_example2:
+                intent = new Intent(v.getContext(), MPAndroidChartExample2.class);
                 startActivity(intent);
                 break;
         }

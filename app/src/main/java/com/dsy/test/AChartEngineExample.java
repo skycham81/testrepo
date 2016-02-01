@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
@@ -65,12 +66,12 @@ public class AChartEngineExample extends AppCompatActivity {
     }
 
     protected void setRenderer(XYMultipleSeriesRenderer renderer, int[] colors, PointStyle[] styles) {
-        renderer.setAxisTitleTextSize(16);
-        renderer.setChartTitleTextSize(20);
-        renderer.setLabelsTextSize(15);
-        renderer.setLegendTextSize(15);
-        renderer.setPointSize(5f);
-        renderer.setMargins(new int[] { 20, 30, 15, 20 });
+        renderer.setAxisTitleTextSize(75);
+        renderer.setChartTitleTextSize(85);
+        renderer.setLabelsTextSize(75);
+        renderer.setLegendTextSize(75);
+        renderer.setPointSize(30f);
+        renderer.setMargins(new int[]{20, 30, 15, 20});
         int length = colors.length;
         for (int i = 0; i < length; i++) {
             XYSeriesRenderer r = new XYSeriesRenderer();
@@ -94,15 +95,13 @@ public class AChartEngineExample extends AppCompatActivity {
         renderer.setLabelsColor(labelsColor);
     }
 
-    protected XYMultipleSeriesDataset buildDataset(String[] titles, List<double[]> xValues,
-                                                   List<double[]> yValues) {
+    protected XYMultipleSeriesDataset buildDataset(String[] titles, List<double[]> xValues, List<double[]> yValues) {
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         addXYSeries(dataset, titles, xValues, yValues, 0);
         return dataset;
     }
 
-    public void addXYSeries(XYMultipleSeriesDataset dataset, String[] titles, List<double[]> xValues,
-                            List<double[]> yValues, int scale) {
+    public void addXYSeries(XYMultipleSeriesDataset dataset, String[] titles, List<double[]> xValues, List<double[]> yValues, int scale) {
         int length = titles.length;
         for (int i = 0; i < length; i++) {
             XYSeries series = new XYSeries(titles[i], scale);
@@ -123,33 +122,29 @@ public class AChartEngineExample extends AppCompatActivity {
             x.add(new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 });
         }
         List<double[]> values = new ArrayList<double[]>();
-        values.add(new double[] { 12.3, 12.5, 13.8, 16.8, 20.4, 24.4, 26.4, 26.1, 23.6, 20.3, 17.2,
-                13.9 });
+        values.add(new double[] { 12.3, 12.5, 13.8, 16.8, 20.4, 24.4, 26.4, 26.1, 23.6, 20.3, 17.2, 13.9 });
         values.add(new double[] { 10, 10, 12, 15, 20, 24, 26, 26, 23, 18, 14, 11 });
         values.add(new double[] { 5, 5.3, 8, 12, 17, 22, 24.2, 24, 19, 15, 9, 6 });
         values.add(new double[] { 9, 10, 11, 15, 19, 23, 26, 25, 22, 18, 13, 10 });
-        int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW };
 
-        PointStyle[] styles = new PointStyle[] { PointStyle.CIRCLE, PointStyle.DIAMOND,
-                PointStyle.TRIANGLE, PointStyle.SQUARE };
+        int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW };
+        PointStyle[] styles = new PointStyle[] { PointStyle.CIRCLE, PointStyle.DIAMOND, PointStyle.TRIANGLE, PointStyle.SQUARE };
         mRenderer = new XYMultipleSeriesRenderer();
         setRenderer(mRenderer, colors, styles);
-
 
         int length = mRenderer.getSeriesRendererCount();
         for (int i = 0; i < length; i++) {
             ((XYSeriesRenderer) mRenderer.getSeriesRendererAt(i)).setFillPoints(true);
         }
-        setChartSettings(mRenderer, "Average temperature", "Month", "Temperature", 0.5, 12.5, -10, 40,
-                Color.LTGRAY, Color.LTGRAY);
+        setChartSettings(mRenderer, "Average temperature", "Month", "Temperature", 0.5, 12.5, -10, 40, Color.LTGRAY, Color.LTGRAY);
         mRenderer.setXLabels(12);
         mRenderer.setYLabels(10);
         mRenderer.setShowGrid(true);
         mRenderer.setXLabelsAlign(Paint.Align.RIGHT);
         mRenderer.setYLabelsAlign(Paint.Align.RIGHT);
         mRenderer.setZoomButtonsVisible(true);
-        mRenderer.setPanLimits(new double[]{-10, 20, -10, 40});
-        mRenderer.setZoomLimits(new double[]{-10, 20, -10, 40});
+        mRenderer.setPanLimits(new double[]{0.5, 12.5, -10, 40});
+        mRenderer.setZoomLimits(new double[]{0.5, 12.5, -10, 40});
 
         mDataset = buildDataset(titles, x, values);
         mCurrentSeries = mDataset.getSeriesAt(0);
@@ -157,7 +152,7 @@ public class AChartEngineExample extends AppCompatActivity {
 
         mCurrentRenderer = (XYSeriesRenderer) mRenderer.getSeriesRendererAt(0);
         mCurrentRenderer.setAnnotationsColor(Color.GREEN);
-        mCurrentRenderer.setAnnotationsTextSize(15);
+        mCurrentRenderer.setAnnotationsTextSize(30);
         mCurrentRenderer.setAnnotationsTextAlign(Paint.Align.CENTER);
     }
 
@@ -243,12 +238,13 @@ public class AChartEngineExample extends AppCompatActivity {
             // enable the chart click events
             mRenderer.setClickEnabled(true);
             mRenderer.setSelectableBuffer(10);
+            mChartView.setBackgroundColor(Color.RED);
             mChartView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // handle the click event on the chart
                     SeriesSelection seriesSelection = mChartView.getCurrentSeriesAndPoint();
                     if (seriesSelection == null) {
-                        Toast.makeText(AChartEngineExample.this, "No chart element", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(AChartEngineExample.this, "No chart element", Toast.LENGTH_SHORT).show();
                     } else {
                         // display information of the clicked point
                         Toast.makeText(
