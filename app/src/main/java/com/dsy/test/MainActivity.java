@@ -1,22 +1,30 @@
 package com.dsy.test;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        MainFragment.OnFragmentInteractionListener , FragmentExample1.OnFragmentInteractionListener,
+        FragmentExample2.OnFragmentInteractionListener{
 
     int mSortMode = -1;
+    ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +36,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.fab).setOnClickListener(this);
-        findViewById(R.id.go_tablelayout).setOnClickListener(this);
-        findViewById(R.id.go_viewpager_for_pageapater).setOnClickListener(this);
-        findViewById(R.id.go_achartengine_example).setOnClickListener(this);
-        findViewById(R.id.go_mpandroidchart_example1).setOnClickListener(this);
-        findViewById(R.id.go_mpandroidchart_example2).setOnClickListener(this);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        drawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("dsy","click icon in actionbar");//왜 안찍히냐 ....
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if(getSupportFragmentManager().getBackStackEntryCount()>0){
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                }else{
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    mDrawerToggle.syncState();
+                }
+            }
+        });
     }
 
     @Override
@@ -70,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id==android.R.id.home){
+            Log.d("dsy","click home button in actionbar");
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -78,15 +110,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    public void clearBackStack(FragmentManager fragmentManager){
+        for(int i=0; i<fragmentManager.getBackStackEntryCount(); i++){
+            fragmentManager.popBackStack();
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
+
+            Fragment fragment = FragmentExample1.newInstance(FragmentExample1.class.getName(),"");
+            //fragmentManager.popBackStack(); //백스택 제일위에 있는 프레그먼트를 없앤다.
+            //fragmentManager.popBackStack(FragmentExample1.class.getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE); //백스택에 특정 이름으로 등록된 프레그먼트를 없앤다.
+            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//백스택에 있는 모든 프레그먼트를 없앤다.
+            //clearBackStack(fragmentManager);
+            fragmentTransaction.replace(R.id.main_fragment, fragment);
+            fragmentTransaction.addToBackStack(FragmentExample1.class.getName());
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
+            Fragment fragment = FragmentExample2.newInstance(FragmentExample2.class.getName(),"");
+            //fragmentManager.popBackStack(); //백스택 제일위에 있는 프레그먼트를 없앤다.
+            //fragmentManager.popBackStack(FragmentExample2.class.getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE); //백스택에 특정 이름으로 등록된 프레그먼트를 없앤다.
+            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//백스택에 있는 모든 프레그먼트를 없앤다.
+            fragmentTransaction.replace(R.id.main_fragment, fragment);
+            fragmentTransaction.addToBackStack(FragmentExample2.class.getName());
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -121,33 +179,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         invalidateOptionsMenu();
     }
 
+    private void replaceFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+    }
+
     @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()){
-            case R.id.fab:
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                break;
-            case R.id.go_tablelayout:
-                intent = new Intent(v.getContext(), TabLayoutExample.class);
-                startActivity(intent);
-                break;
-            case R.id.go_viewpager_for_pageapater:
-                intent = new Intent(v.getContext(), ViewPagerExample.class);
-                startActivity(intent);
-                break;
-            case R.id.go_achartengine_example:
-                intent = new Intent(v.getContext(), AChartEngineExample.class);
-                startActivity(intent);
-                break;
-            case R.id.go_mpandroidchart_example1:
-                intent = new Intent(v.getContext(), MPAndroidChartExample1.class);
-                startActivity(intent);
-                break;
-            case R.id.go_mpandroidchart_example2:
-                intent = new Intent(v.getContext(), MPAndroidChartExample2.class);
-                startActivity(intent);
-                break;
-        }
+    public boolean onSupportNavigateUp() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+            return true;
+        else
+            return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -12,46 +12,11 @@
     tools:context="com.dsy.test.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:id="@+id/go_tablelayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go TableLayout Example!" />
-
-    <TextView
-        android:id="@+id/go_viewpager_for_pageapater"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_tablelayout"
-        android:layout_marginTop="10dp"
-        android:text="Go ViewPager for PageAdapter"
-        />
-
-    <TextView
-        android:id="@+id/go_achartengine_example"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_viewpager_for_pageapater"
-        android:layout_marginTop="10dp"
-        android:text="Go AChartEngine Example"
-        />
-
-    <TextView
-        android:id="@+id/go_mpandroidchart_example1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_achartengine_example"
-        android:layout_marginTop="10dp"
-        android:text="Go MPAndroidChart Example1"
-        />
-
-    <TextView
-        android:id="@+id/go_mpandroidchart_example2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_mpandroidchart_example1"
-        android:layout_marginTop="10dp"
-        android:text="Go MPAndroidChart Example2"
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.dsy.test.MainFragment"
+        android:id="@+id/main_fragment"
         />
 
 </RelativeLayout>

@@ -45,7 +45,7 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
             "Party Y", "Party Z"
     };
 
-    protected BarChart mChart;
+    private BarChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
 
@@ -97,20 +97,6 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
 
         YAxisValueFormatter custom = new MyYAxisValueFormatter();
 
-        YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setTypeface(mTf);
-        leftAxis.setLabelCount(8, false);
-        leftAxis.setValueFormatter(custom);
-        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-        leftAxis.setSpaceTop(15f);
-
-        YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
-        rightAxis.setTypeface(mTf);
-        rightAxis.setLabelCount(8, false);
-        rightAxis.setValueFormatter(custom);
-        rightAxis.setSpaceTop(15f);
-
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setForm(Legend.LegendForm.SQUARE);
@@ -122,14 +108,9 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
         // l.setCustom(ColorTemplate.VORDIPLOM_COLORS, new String[] { "abc",
         // "def", "ghj", "ikl", "mno" });
 
-        setData(12, 50);
+        setData(12, 100);
 
-        // setting data
-        mSeekBarY.setProgress(50);
-        mSeekBarX.setProgress(12);
 
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
