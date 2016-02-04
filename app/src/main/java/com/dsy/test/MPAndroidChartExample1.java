@@ -98,6 +98,11 @@ public class MPAndroidChartExample1 extends AppCompatActivity implements SeekBar
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // If not handled by drawerToggle, home needs to be handled by returning to previous
+        if (item != null && item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
 
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {

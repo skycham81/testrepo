@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.dsy.test.MainFragment"
-        android:id="@+id/main_fragment"
+        android:id="@+id/fragment_container"
         />
 
 </RelativeLayout>

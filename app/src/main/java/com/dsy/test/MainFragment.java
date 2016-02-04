@@ -130,6 +130,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.go_replace_fragment:
+                ((MainActivity)getContext()).replaceFragment(FragmentExample1.class.getSimpleName());
                 break;
             default:
                 break;
