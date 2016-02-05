@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int mSortMode = -1;
 
+    private MainFragment mMainFragment = null;
+
     private final DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
         @Override
         public void onDrawerClosed(View drawerView) {
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+        if(mMainFragment==null)
+            mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (!mToolbarInitialized) {
             throw new IllegalStateException("You must run super.initializeToolbar at " +
                     "the end of your onCreate method");
@@ -261,6 +265,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //fragmentManager.popBackStack(FragmentExample2.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         //백스택에 있는 모든 프레그먼트를 없앤다.
         fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_up, R.anim.slide_out_down);
+
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

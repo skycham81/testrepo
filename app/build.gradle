@@ -41,4 +41,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'org.achartengine:achartengine:1.2.0'
     compile 'io.realm:realm-android:0.87.3'
+    compile 'com.ssomai:android.scalablelayout:2.1.0' //ScalableLayout 라이브러리
 }
