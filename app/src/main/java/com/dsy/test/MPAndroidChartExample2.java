@@ -28,14 +28,20 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
-
+/*
     protected String[] mMonths = new String[] {
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
+    };
+*/
+
+    protected String[] mMonths = new String[] {
+            "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"
     };
 
     protected String[] mParties = new String[] {
@@ -83,6 +89,7 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
 
         // scaling can now only be done on x- and y-axis separately
         mChart.setPinchZoom(false);
+        mChart.getAxisRight().setEnabled(false);
 
         mChart.setDrawGridBackground(false);
         // mChart.setDrawYLabels(false);
@@ -93,7 +100,7 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //xAxis.setTypeface(mTf);
         xAxis.setDrawGridLines(false);
-        xAxis.setSpaceBetweenLabels(2);
+        xAxis.setSpaceBetweenLabels(0);
 
         YAxisValueFormatter custom = new MyYAxisValueFormatter();
 
@@ -101,8 +108,8 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setForm(Legend.LegendForm.SQUARE);
         l.setFormSize(9f);
-        l.setTextSize(11f);
-        l.setXEntrySpace(4f);
+        l.setTextSize(9f);
+        l.setXEntrySpace(9f);
         // l.setExtra(ColorTemplate.VORDIPLOM_COLORS, new String[] { "abc",
         // "def", "ghj", "ikl", "mno" });
         // l.setCustom(ColorTemplate.VORDIPLOM_COLORS, new String[] { "abc",
@@ -246,6 +253,7 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
         }
 
         BarDataSet set1 = new BarDataSet(yVals1, "DataSet");
+        set1.setColors(ColorTemplate.JOYFUL_COLORS);
         set1.setBarSpacePercent(35f);
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
@@ -256,6 +264,8 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
         data.setValueTypeface(mTf);
 
         mChart.setData(data);
+
+        mChart.getData().setHighlightEnabled(false);
     }
 
     @SuppressLint("NewApi")
@@ -279,17 +289,5 @@ public class MPAndroidChartExample2 extends AppCompatActivity implements SeekBar
     public void onNothingSelected() {
     }
 
-    public class MyYAxisValueFormatter implements YAxisValueFormatter {
 
-        private DecimalFormat mFormat;
-
-        public MyYAxisValueFormatter() {
-            mFormat = new DecimalFormat("###,###,###,##0.0");
-        }
-
-        @Override
-        public String getFormattedValue(float value, YAxis yAxis) {
-            return mFormat.format(value) + " $";
-        }
-    }
 }

@@ -49,12 +49,21 @@
         />
 
     <TextView
-        android:id="@+id/go_replace_fragment"
+        android:id="@+id/go_mpandroidchart_example3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/go_mpandroidchart_example2"
         android:layout_marginTop="10dp"
-        android:text="Go Replace Fragment(카드뷰)"
+        android:text="Go MPAndroidChart Example3"
+        />
+
+    <TextView
+        android:id="@+id/go_replace_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/go_mpandroidchart_example3"
+        android:layout_marginTop="10dp"
+        android:text="Go Replace Fragment"
         />
 
 </RelativeLayout>
