@@ -1,69 +1,84 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dsy.test.MainFragment"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.dsy.test.MainFragment">
 
-    <TextView
-        android:id="@+id/go_tablelayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go TableLayout Example!" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/go_viewpager_for_pageapater"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_tablelayout"
-        android:layout_marginTop="10dp"
-        android:text="Go ViewPager for PageAdapter"
-        />
+        <Button
+            android:id="@+id/go_tablelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go TableLayout Example!"
+            android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/go_achartengine_example"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_viewpager_for_pageapater"
-        android:layout_marginTop="10dp"
-        android:text="Go AChartEngine Example"
-        />
+        <Button
+            android:id="@+id/go_viewpager_for_pageapater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_tablelayout"
+            android:layout_marginTop="3dp"
+            android:text="Go ViewPager for PageAdapter"
+            android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/go_mpandroidchart_example1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_achartengine_example"
-        android:layout_marginTop="10dp"
-        android:text="Go MPAndroidChart Example1"
-        />
+        <Button
+            android:id="@+id/go_achartengine_example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_viewpager_for_pageapater"
+            android:layout_marginTop="3dp"
+            android:text="Go AChartEngine Example"
+            android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/go_mpandroidchart_example2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_mpandroidchart_example1"
-        android:layout_marginTop="10dp"
-        android:text="Go MPAndroidChart Example2"
-        />
+        <Button
+            android:id="@+id/go_mpandroidchart_example1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_achartengine_example"
+            android:layout_marginTop="3dp"
+            android:text="Go MPChart BarChart1"
+            android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/go_mpandroidchart_example3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_mpandroidchart_example2"
-        android:layout_marginTop="10dp"
-        android:text="Go MPAndroidChart Example3"
-        />
+        <Button
+            android:id="@+id/go_mpandroidchart_example2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_mpandroidchart_example1"
+            android:layout_marginTop="3dp"
+            android:text="Go MPChart BarChart2"
+            android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/go_replace_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_mpandroidchart_example3"
-        android:layout_marginTop="10dp"
-        android:text="Go Replace Fragment"
-        />
+        <Button
+            android:id="@+id/go_mpandroidchart_example3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_mpandroidchart_example2"
+            android:layout_marginTop="3dp"
+            android:text="Go MPChart StackedBarChart"
+            android:textAllCaps="false" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/go_google_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_mpandroidchart_example3"
+            android:layout_marginTop="3dp"
+            android:text="Go Google Chart"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/go_replace_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/go_google_chart"
+            android:layout_marginTop="3dp"
+            android:text="Go Replace Fragment"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+</ScrollView>

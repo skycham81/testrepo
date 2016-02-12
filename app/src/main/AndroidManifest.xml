@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dsy.test">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
@@ -62,6 +64,13 @@
         </activity>
         <activity
             android:name=".MPAndroidChartExample3"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".GoogleChartExample"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity">
             <meta-data

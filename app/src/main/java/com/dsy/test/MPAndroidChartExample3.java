@@ -122,7 +122,10 @@ public class MPAndroidChartExample3 extends AppCompatActivity implements OnChart
 
         mChart.setData(data);
 
-        mChart.zoom(1.01f, 1f, 0, 0);
+        //mChart.zoom(1.01f, 1f, 0, 0);
+        //mChart.getViewPortHandler().setMaximumScaleX(1.01f);
+        mChart.getViewPortHandler().setMinimumScaleX(1.01f);
+        //mChart.getViewPortHandler().setMaximumScaleY(1f);
 
         mChart.invalidate();
     }

@@ -74,6 +74,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.go_mpandroidchart_example1).setOnClickListener(this);
         view.findViewById(R.id.go_mpandroidchart_example2).setOnClickListener(this);
         view.findViewById(R.id.go_mpandroidchart_example3).setOnClickListener(this);
+        view.findViewById(R.id.go_google_chart).setOnClickListener(this);
         view.findViewById(R.id.go_replace_fragment).setOnClickListener(this);
 
         return view;
@@ -132,6 +133,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.go_mpandroidchart_example3:
                 intent = new Intent(v.getContext(), MPAndroidChartExample3.class);
+                startActivity(intent);
+                break;
+            case R.id.go_google_chart:
+                intent = new Intent(v.getContext(), GoogleChartExample.class);
                 startActivity(intent);
                 break;
             case R.id.go_replace_fragment:
