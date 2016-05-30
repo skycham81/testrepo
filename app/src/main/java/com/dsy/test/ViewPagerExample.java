@@ -1,6 +1,7 @@
 package com.dsy.test;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -8,11 +9,15 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by new on 2016-01-19.
@@ -25,7 +30,34 @@ public class ViewPagerExample extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewpager_example);
 
-        final SwipeRefreshLayout swipeView = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+
+        ViewTreeObserver vto = swipeLayout.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Calculate the trigger distance.
+                final DisplayMetrics metrics = getResources().getDisplayMetrics();
+                Float mDistanceToTriggerSync = Math.min( ((View) swipeLayout.getParent()).getHeight() * 0.6f, 120 * metrics.density);
+
+                try {
+                    // Set the internal trigger distance using reflection.
+                    Field field = SwipeRefreshLayout.class.getDeclaredField("mDistanceToTriggerSync");
+                    field.setAccessible(true);
+                    field.setFloat(swipeLayout, mDistanceToTriggerSync);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Only needs to be done once so remove listener.
+                ViewTreeObserver obs = swipeLayout.getViewTreeObserver();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    obs.removeOnGlobalLayoutListener(this);
+                } else {
+                    obs.removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -50,14 +82,14 @@ public class ViewPagerExample extends AppCompatActivity {
             }
         });
 
-        swipeView.setColorSchemeResources (
+        swipeLayout.setColorSchemeResources (
             R.color.color_scheme_1_1, R.color.color_scheme_1_2,
             R.color.color_scheme_1_3, R.color.color_scheme_1_4);
 
-        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeView.setRefreshing(true);
+                swipeLayout.setRefreshing(true);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -66,7 +98,7 @@ public class ViewPagerExample extends AppCompatActivity {
                         mItemIndex++;
                         if(mItemIndex>2) mItemIndex = 0;
                         viewPager.setCurrentItem(mItemIndex);
-                        swipeView.setRefreshing(false);
+                        swipeLayout.setRefreshing(false);
                     }
                 }, 1000);
             }
